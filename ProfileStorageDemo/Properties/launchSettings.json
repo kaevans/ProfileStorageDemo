@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ProfileStorageDemo (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ProfileStorageDemo (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

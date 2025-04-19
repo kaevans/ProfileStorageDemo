@@ -32,7 +32,7 @@ namespace ProfileStorageDemo
 
         private async void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Saving...";
+            
 
             Windows.Storage.ApplicationDataContainer localSettings =
                 Windows.Storage.ApplicationData.Current.LocalSettings;
@@ -72,9 +72,68 @@ namespace ProfileStorageDemo
 
             myTextBlock.Text += "\nWrote roaming file " + roamingFile.Path;
 
-            myButton.Content = "Click Me";
+            
         }
 
+        private async void readButton_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.Storage.ApplicationDataContainer localSettings =
+                Windows.Storage.ApplicationData.Current.LocalSettings;
+            Windows.Storage.StorageFolder localFolder =
+                Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            
+
+            // Safely retrieve the value from localSettings.Values
+            if (localSettings.Values.TryGetValue("myString", out object? myStringValue) && myStringValue is string localSetting)
+            {
+                myTextBlock.Text += $"\nRead local setting: {localSetting}";
+            }
+            else
+            {
+                myTextBlock.Text += "\nLocal setting 'myString' not found or is null.";
+            }
+
+            // Safely retrieve the value from roamingSettings.Values
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+                Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if(roamingSettings.Values.TryGetValue("exampleSetting", out object? exampleSettingValue) && exampleSettingValue is string roamingSetting)
+            {
+                myTextBlock.Text += $"\nRead roaming setting: {roamingSetting}";
+            }
+            else
+            {
+                myTextBlock.Text += "\nRoaming setting 'exampleSetting' not found or is null.";
+            }
+
+            // Safely read the file content 
+            StorageFile? sampleFile = await localFolder.TryGetItemAsync("dataFile.txt") as StorageFile;
+            if (sampleFile != null)
+            {
+                string fileContent = await FileIO.ReadTextAsync(sampleFile);
+                myTextBlock.Text += $"\nRead local file: {fileContent}";
+            }
+            else
+            {
+                myTextBlock.Text += "\nLocal file 'dataFile.txt' not found.";
+            }
+            // Safely read the roaming file content
+
+            Windows.Storage.StorageFolder roamingFolder =
+                Windows.Storage.ApplicationData.Current.RoamingFolder;
+
+            StorageFile? roamingFile = await roamingFolder.TryGetItemAsync("dataFile.txt") as StorageFile;
+            if (roamingFile != null)
+            {
+                string roamingFileContent = await FileIO.ReadTextAsync(roamingFile);
+                myTextBlock.Text += $"\nRead roaming file: {roamingFileContent}";
+            }
+            else
+            {
+                myTextBlock.Text += "\nRoaming file 'dataFile.txt' not found.";
+            }
+
+        }
     }
 
 

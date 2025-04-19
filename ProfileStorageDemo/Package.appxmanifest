@@ -10,7 +10,7 @@
   <Identity
     Name="6eb4e9e6-3afe-4ee2-8c70-b26e3e36e009"
     Publisher="CN=kirke"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="6eb4e9e6-3afe-4ee2-8c70-b26e3e36e009" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

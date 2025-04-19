@@ -10,7 +10,8 @@
     Title="ProfileStorageDemo">
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+        <Button x:Name="myButton" Click="myButton_Click">Save</Button>
+        <Button x:Name="readButton" Click="readButton_Click">Read</Button>
         <TextBlock x:Name="myTextBlock" Margin="10,0,0,0" Text="Hello, World!" Height="300" />
     </StackPanel>
 </Window>
